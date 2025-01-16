@@ -1,4 +1,4 @@
-import express,{Router} from 'express'
+import express,{Router,json,urlencoded} from 'express'
 import productsRoutes from './routes/products/index'
 const port = 3000
 
@@ -12,8 +12,8 @@ app.get('/',(req,res) => {
 })
  
 
-
-
+app.use(urlencoded({extended : false}))
+app.use(json())
 app.use('/products',productsRoutes)
 
 app.listen(port,() => 
