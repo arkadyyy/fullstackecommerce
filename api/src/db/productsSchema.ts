@@ -8,4 +8,5 @@ export const productsTable = pgTable("products", {
   price : doublePrecision().notNull(),
   age: integer().notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
+  
 });
