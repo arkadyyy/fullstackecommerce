@@ -3,6 +3,8 @@ import { Request,Response } from "express"
 import { db } from "../../db"
 import { productsTable } from "../../db/productsSchema"
 import { eq } from "drizzle-orm"
+import _ from 'lodash'
+import { createProductSchema } from '../../db/productsSchema.ts'
 const getProducts = async (req : Request,res : Response) => {
     try {
         const products = await db.select().from(productsTable)
@@ -28,7 +30,7 @@ const getProductById = async (req : Request,res : Response) => {
 
 const createProduct = async (req : Request,res : Response) => {
   try {
-    const [product] = await db.insert(productsTable).values(req.body).returning()
+    const [product] = await db.insert(productsTable).values(req.cleanBody).returning()
     res.status(201).json(product)
   } catch (error) {
     res.status(500).send(error)
@@ -41,7 +43,7 @@ const updateProduct = async (req : Request,res : Response) => {
 
     
     try {
-        const updatedFields = req.body
+        const updatedFields = req.cleanBody
         const updatedProduct = await db.update(productsTable).set(updatedFields).where(eq(productsTable.id,Number(id))).returning()
         if(!updatedProduct){
             res.status(404).send({message : `Product with id ${id} failed to update`})
