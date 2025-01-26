@@ -5,6 +5,7 @@ import { validationData } from '../../middleware/validationMiddleware'
 import {createInsertSchema,createSelectSchema} from 'drizzle-zod'
 import { productsTable } from '../../db/productsSchema'
 import { createProductSchema,updateProductSchema } from '../../db/productsSchema'
+import { verifySeller, verifyToken } from '../../middleware/authMiddleware'
 
 // const createProductSchema = z.object({
 //     name : z.string(),
@@ -18,9 +19,9 @@ const router = Router()
 
 router.get('/',controller.getProducts)
 router.get('/:id',controller.getProductById)
-router.post('/',validationData(createProductSchema),controller.createProduct)
-router.put('/id',validationData(updateProductSchema),controller.updateProduct)
-router.delete('/:id',controller.deleteProduct)
+router.post('/',verifyToken,verifySeller, validationData(createProductSchema),controller.createProduct)
+router.put('/id',verifyToken,verifySeller,validationData(updateProductSchema),controller.updateProduct)
+router.delete('/:id',verifyToken,verifySeller,controller.deleteProduct)
 
 router.post('/',(req,res) => {
     res.send('product created !')

@@ -1,5 +1,6 @@
 import express,{Router,json,urlencoded} from 'express'
 import productsRoutes from './routes/products/index'
+import authRoutes from './routes/auth/index'
 const port = 3000
 
 const app = express()
@@ -15,6 +16,7 @@ app.get('/',(req,res) => {
 app.use(urlencoded({extended : false}))
 app.use(json())
 app.use('/products',productsRoutes)
+app.use('/auth',authRoutes)
 
 app.listen(port,() => 
     console.log(`app is running on port ${port}`)
