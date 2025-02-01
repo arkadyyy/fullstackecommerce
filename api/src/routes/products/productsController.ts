@@ -1,10 +1,10 @@
 
 import { Request,Response } from "express"
 import { db } from "../../db"
-import { productsTable } from "../../db/productsSchema"
+import { productsTable } from "../../db/productsSchema.js"
 import { eq } from "drizzle-orm"
 import _ from 'lodash'
-import { createProductSchema } from '../../db/productsSchema.ts'
+import { createProductSchema } from '../../db/productsSchema.js'
 const getProducts = async (req : Request,res : Response) => {
     try {
         const products = await db.select().from(productsTable)

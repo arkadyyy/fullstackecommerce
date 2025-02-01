@@ -15,7 +15,7 @@ export function verifyToken(req : Request,res : Response,next : NextFunction){
             res.status(401).json({error : "access denied"})
         }
         console.log(decoded)
-       
+        //@ts-ignore
         req.userId = decoded.userId
         next()
     } catch (error) {

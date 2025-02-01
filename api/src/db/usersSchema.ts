@@ -12,12 +12,12 @@ export const usersTable = pgTable('users', {
   address: text(),
 });
 
-// export const createUserSchema = createInsertSchema(usersTable).omit({
-//   id: true,
-//   role: true,
-// });
+export const createUserSchema = createInsertSchema(usersTable).omit({
+  id: true,
+  role: true,
+});
 
-// export const loginSchema = createInsertSchema(usersTable).pick({
-//   email: true,
-//   password: true,
-// });
+export const loginSchema = createInsertSchema(usersTable).pick({
+  email: true,
+  password: true,
+});

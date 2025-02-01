@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { validationData } from "../../middleware/validationMiddleware";
-import { createUserSchema, loginSchema, usersTable } from "../../db/usersSchema";
+import { validationData } from "../../middleware/validationMiddleware.js";
+import { createUserSchema, loginSchema, usersTable } from "../../db/usersSchema.js";
 import bcrypt from 'bcryptjs'
 import { db } from "../../db";
 import { eq } from "drizzle-orm";
